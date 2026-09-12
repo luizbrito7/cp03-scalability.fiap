@@ -21,7 +21,7 @@
 - [ ] Pods em execução antes do teste de carga (`kubectl get pods -n app`)
 - [ ] HPA configurado (`kubectl get hpa -n app`)
 - [ ] Consulta das informações do HPA (`kubectl describe hpa nginx -n app`)
-- [ ] Execução do teste de carga (`ab -k -c 200 -n 1000000 -t 300 http://<EXTERNAL_IP>/`)
+- [ ] Execução do teste de carga (`ab -k -c 500 -n 20000000 -t 300 http://<EXTERNAL_IP>/`)
 - [ ] Comportamento dos pods durante/após aumento de carga (`kubectl get pods -n app -w`)
 - [ ] Quantidade de réplicas após atuação do HPA (`kubectl get hpa -n app -w`)
 - [ ] Aplicação funcionando (`curl http://<EXTERNAL_IP>/` ou navegador)
@@ -51,9 +51,8 @@ Ajusta a capacidade automaticamente conforme a demanda real, evitando superprovi
 
 **Quais dificuldades foram encontradas durante a atividade e como foram resolvidas?**
 - Versão do Kubernetes `1.33` indisponível na região `westeurope` fora do plano Long-Term Support: resolvido fixando `kubernetes_version = "1.34"`.
-- Configuração inicial do FluxCD apontava pra um repositório de outro projeto: corrigido apontando `GitRepository` para este repositório e path (`fluxcd/nginx`).
 - `terraform apply` interrompido antes de concluir a criação do cluster: resolvido reexecutando o apply.
-- Request de CPU ajustado muito baixo (10m) para acelerar o teste causou loop de scale-up sem carga real: o pico de CPU do próprio boot do nginx já estourava 50% do request, disparando novo scale-up (que criava mais pods, mais boots, mais picos) até o teto de 10 réplicas. Resolvido subindo o request para um valor que absorve o pico de boot (30m) sem perder sensibilidade à carga real do `ab`.
+- Request de CPU ajustado muito baixo (10m, depois 30m) para acelerar o teste causou loop de scale-up sem carga real: o pico de CPU do próprio boot do nginx já estourava 50% do request, disparando novo scale-up (que criava mais pods, mais boots, mais picos) até o teto de 10 réplicas. Resolvido voltando ao request original (50m), que absorve o pico de boot sem perder sensibilidade à carga real do `ab`.
 
 ## Conclusão
 
