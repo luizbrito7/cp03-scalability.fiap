@@ -17,11 +17,11 @@ flowchart LR
     Nginx -->|ab satura CPU| HPA[HPA escala 2→10]
 ```
 
-CP3 — Horizontal Pod Autoscaler. AKS provisionado via Terraform, app nginx sincronizada via FluxCD (GitOps), HPA escalando por uso de CPU, validado com teste de carga (`ab`).
+CP3: Horizontal Pod Autoscaler. AKS provisionado via Terraform, app nginx sincronizada via FluxCD (GitOps), HPA escalando por uso de CPU, validado com teste de carga (`ab`).
 
 ## Stack
 
-- **Infra**: Terraform (`terraform/`) — AKS na Azure.
+- **Infra**: Terraform (`terraform/`): AKS na Azure.
 - **GitOps**: FluxCD, sincroniza `fluxcd/nginx/` direto deste repo.
 - **App**: nginx, `Deployment` + `Service` (LoadBalancer) + `HorizontalPodAutoscaler`.
 - **Teste de carga**: Apache Bench (`ab`).
@@ -34,10 +34,20 @@ fluxcd/       # manifests sincronizados pelo Flux: namespace, deployment, servic
 docs/         # documentação detalhada por área + relatório da atividade
 ```
 
+## Equipe
+
+| Nome | RM |
+|---|---|
+| Anderson Huang | rm565920@fiap.com.br |
+| Bruno Henrique | rm566277@fiap.com.br |
+| Ronaldo Attamah | rm564630@fiap.com.br |
+| Luiz Brito | rm562192@fiap.com.br |
+| Guylherme Miguel | rm562374@fiap.com.br |
+
 ## Docs
 
 | Doc | Conteúdo |
 |---|---|
 | [terraform/README.md](terraform/README.md) | infra AKS, versões, comandos apply |
 | [fluxcd/README.md](fluxcd/README.md) | GitOps, manifests do nginx, config do HPA |
-| [docs/report/README.md](docs/report/README.md) | relatório CP3 — respostas, evidências, conclusão |
+| [docs/report/README.md](docs/report/README.md) | relatório CP3: respostas, evidências, conclusão |

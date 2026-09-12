@@ -1,10 +1,14 @@
-# Relatório — CP3: Horizontal Pod Autoscaler
+# Relatório CP3: Horizontal Pod Autoscaler
 
 ## Equipe
 
 | Nome | RM |
 |---|---|
-| _preencher_ | _preencher_ |
+| Anderson Huang | rm565920@fiap.com.br |
+| Bruno Henrique | rm566277@fiap.com.br |
+| Ronaldo Attamah | rm564630@fiap.com.br |
+| Luiz Brito | rm562192@fiap.com.br |
+| Guylherme Miguel | rm562374@fiap.com.br |
 
 **Ambiente utilizado**: Azure (AKS), provisionado via Terraform ([terraform/](../../terraform/README.md)), app sincronizada via FluxCD ([fluxcd/](../../fluxcd/README.md)).
 
@@ -25,7 +29,7 @@
 ## Questões
 
 **O que é o Horizontal Pod Autoscaler?**
-Controlador nativo do Kubernetes que ajusta automaticamente o número de réplicas de um Deployment (ou ReplicaSet/StatefulSet) com base em métricas observadas — CPU, memória, ou métricas customizadas/externas — mantendo a utilização próxima de um alvo definido, sem intervenção manual.
+Controlador nativo do Kubernetes que ajusta automaticamente o número de réplicas de um Deployment (ou ReplicaSet/StatefulSet) com base em métricas observadas (CPU, memória, ou métricas customizadas/externas), mantendo a utilização próxima de um alvo definido, sem intervenção manual.
 
 **Qual métrica foi utilizada para realizar o escalonamento?**
 Utilização de CPU (`averageUtilization`), medida em relação ao `request` de CPU definido no Deployment.
@@ -34,10 +38,10 @@ Utilização de CPU (`averageUtilization`), medida em relação ao `request` de 
 Mínimo: 2. Máximo: 10.
 
 **O que aconteceu com a quantidade de pods quando a carga sobre a aplicação aumentou?**
-_preencher com dado observado_ — esperado: o HPA detectou CPU acima do alvo de 50% e escalou progressivamente as réplicas (respeitando o ciclo de reconciliação do controller, ~15s) até o teto de 10, conforme a carga se manteve.
+_preencher com dado observado_. Esperado: o HPA detectou CPU acima do alvo de 50% e escalou progressivamente as réplicas (respeitando o ciclo de reconciliação do controller, ~15s) até o teto de 10, conforme a carga se manteve.
 
 **O que aconteceu após a redução ou encerramento da carga?**
-_preencher com dado observado_ — esperado: após o fim do `ab`, a métrica de CPU caiu abaixo do alvo; o HPA aguardou a janela de estabilização (default 5min) e reduziu as réplicas de volta ao mínimo (2).
+_preencher com dado observado_. Esperado: após o fim do `ab`, a métrica de CPU caiu abaixo do alvo; o HPA aguardou a janela de estabilização (default 5min) e reduziu as réplicas de volta ao mínimo (2).
 
 **Qual é a função do Metrics Server no funcionamento do HPA?**
 Coleta as métricas de uso de CPU/memória de pods e nodes via kubelet (Resource Metrics API) e as expõe pro `kube-apiserver`. O HPA consulta essa API periodicamente para decidir se escala; sem o Metrics Server ele não tem dado de CPU/memória para atuar.
@@ -46,9 +50,9 @@ Coleta as métricas de uso de CPU/memória de pods e nodes via kubelet (Resource
 Ajusta a capacidade automaticamente conforme a demanda real, evitando superprovisionamento constante (custo desnecessário com réplicas ociosas) e subdimensionamento (indisponibilidade em picos), aproveitando a elasticidade que a nuvem já oferece em nível de infraestrutura.
 
 **Quais dificuldades foram encontradas durante a atividade e como foram resolvidas?**
-- Versão do Kubernetes `1.33` indisponível na região `westeurope` fora do plano Long-Term Support — resolvido fixando `kubernetes_version = "1.34"`.
-- Configuração inicial do FluxCD apontava pra um repositório de outro projeto — corrigido apontando `GitRepository` para este repositório e path (`fluxcd/nginx`).
-- `terraform apply` interrompido antes de concluir a criação do cluster — resolvido reexecutando o apply.
+- Versão do Kubernetes `1.33` indisponível na região `westeurope` fora do plano Long-Term Support: resolvido fixando `kubernetes_version = "1.34"`.
+- Configuração inicial do FluxCD apontava pra um repositório de outro projeto: corrigido apontando `GitRepository` para este repositório e path (`fluxcd/nginx`).
+- `terraform apply` interrompido antes de concluir a criação do cluster: resolvido reexecutando o apply.
 
 ## Conclusão
 
