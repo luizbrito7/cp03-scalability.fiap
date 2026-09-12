@@ -12,13 +12,9 @@
 
 ```mermaid
 flowchart LR
-    TF[Terraform] -.provisiona.-> AKS[AKS Cluster]
-    Repo[Este repo] -.observa.-> Flux[FluxCD]
-    Flux -->|sync fluxcd/nginx| AKS
-    AB[ab - teste de carga] -->|requests| LB[LoadBalancer]
-    LB --> Pods[nginx pods]
-    MS[Metrics Server] -->|CPU %| HPA[HPA]
-    HPA -->|scale 2..10| Pods
+    TF[Terraform] -->|provisiona| AKS[AKS]
+    AKS -->|FluxCD sync| Nginx[nginx]
+    Nginx -->|ab satura CPU| HPA[HPA escala 2→10]
 ```
 
 CP3 — Horizontal Pod Autoscaler. AKS provisionado via Terraform, app nginx sincronizada via FluxCD (GitOps), HPA escalando por uso de CPU, validado com teste de carga (`ab`).
