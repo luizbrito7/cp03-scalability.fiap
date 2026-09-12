@@ -13,7 +13,7 @@ Qualquer push em `fluxcd/nginx/` na branch `main` é sincronizado automaticament
 ## Manifests (`fluxcd/nginx/`)
 
 - `namespace.yaml`: namespace `app`.
-- `deployment.yaml`: nginx, 2 réplicas, `requests: 10m cpu / 64Mi`, `limits: 50m cpu / 128Mi`. Request de CPU bem baixo de propósito: como o HPA mede % sobre o request, pouca carga já estoura o alvo de 50%.
+- `deployment.yaml`: nginx, 2 réplicas, `requests: 30m cpu / 64Mi`, `limits: 100m cpu / 128Mi`. Request baixo de propósito (satura rápido sob carga real), mas não tão baixo a ponto do pico de boot do próprio nginx (alguns ms de CPU na inicialização) já estourar o alvo sozinho — valor menor (ex.: 10m) causa loop de scale-up por ressonância: pod novo bota, pico de boot dispara scale-up, mais pods novos boot, mais picos, até bater no teto sem carga real nenhuma.
 - `service.yaml`: `LoadBalancer`, expõe porta 80 (Azure provisiona IP público).
 - `hpa.yaml`: `HorizontalPodAutoscaler` (`autoscaling/v2`), `minReplicas: 2`, `maxReplicas: 10`, target CPU `averageUtilization: 50`.
 - `kustomization.yaml`: agrupa os 4 arquivos acima.

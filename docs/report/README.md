@@ -53,6 +53,7 @@ Ajusta a capacidade automaticamente conforme a demanda real, evitando superprovi
 - Versão do Kubernetes `1.33` indisponível na região `westeurope` fora do plano Long-Term Support: resolvido fixando `kubernetes_version = "1.34"`.
 - Configuração inicial do FluxCD apontava pra um repositório de outro projeto: corrigido apontando `GitRepository` para este repositório e path (`fluxcd/nginx`).
 - `terraform apply` interrompido antes de concluir a criação do cluster: resolvido reexecutando o apply.
+- Request de CPU ajustado muito baixo (10m) para acelerar o teste causou loop de scale-up sem carga real: o pico de CPU do próprio boot do nginx já estourava 50% do request, disparando novo scale-up (que criava mais pods, mais boots, mais picos) até o teto de 10 réplicas. Resolvido subindo o request para um valor que absorve o pico de boot (30m) sem perder sensibilidade à carga real do `ab`.
 
 ## Conclusão
 
