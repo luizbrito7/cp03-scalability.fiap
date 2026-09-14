@@ -10,6 +10,21 @@ spec:
     name: nginx
   minReplicas: 2
   maxReplicas: 10
+  behavior:
+    scaleUp:
+      stabilizationWindowSeconds: 30
+      policies:
+        - type: Pods
+          value: 1
+          periodSeconds: 15
+      selectPolicy: Max
+    scaleDown:
+      stabilizationWindowSeconds: 30
+      policies:
+        - type: Pods
+          value: 1
+          periodSeconds: 15
+      selectPolicy: Max
   metrics:
     - type: Resource
       resource:
