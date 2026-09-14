@@ -15,7 +15,7 @@
 ## Evidências
 
 > Prints a anexar no PDF final, um por item, com comando + resultado visível.
-> Vídeo de apoio (cobre execução do teste + comportamento dos pods + réplicas em tempo real): [`evidence/loadtest-run.mp4`](evidence/loadtest-run.mp4)
+> Vídeo de apoio (cobre execução do teste + comportamento dos pods + réplicas em tempo real): https://youtu.be/-KHLXy-fnpQ
 
 - [x] Cluster Kubernetes funcionando (`kubectl get nodes`) — [`evidence/cluster-funcionando.png`](evidence/cluster-funcionando.png) (via k9s)
 - [x] Deployment criado (`kubectl get deploy -n app`) — [`evidence/deployment-criado.png`](evidence/deployment-criado.png) (via k9s)
@@ -27,7 +27,7 @@
 - [x] Quantidade de réplicas após atuação do HPA (`kubectl get hpa -n app -w`) — coberto no vídeo
 - [x] Aplicação funcionando (`curl http://<EXTERNAL_IP>/` ou navegador) — [`evidence/app-funcionando.png`](evidence/app-funcionando.png)
 
-Itens marcados `[x]` já têm evidência em vídeo; ainda assim, tirar 1-2 prints de frames chave (pico de réplicas, volta ao mínimo) pra facilitar leitura no PDF — vídeo sozinho não é aceito como "captura de tela".
+Itens marcados `[x]` já têm evidência em vídeo (https://youtu.be/-KHLXy-fnpQ); ainda assim, tirar 1-2 prints de frames chave (pico de réplicas, volta ao mínimo) pra facilitar leitura no PDF — vídeo sozinho não é aceito como "captura de tela".
 
 ## Questões
 
