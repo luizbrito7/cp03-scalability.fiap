@@ -18,10 +18,10 @@
 > Vídeo de apoio (cobre execução do teste + comportamento dos pods + réplicas em tempo real): [`evidence/loadtest-run.mp4`](evidence/loadtest-run.mp4)
 
 - [ ] Cluster Kubernetes funcionando (`kubectl get nodes`)
-- [ ] Deployment criado (`kubectl get deploy -n app`)
-- [ ] Pods em execução antes do teste de carga (`kubectl get pods -n app`)
-- [ ] HPA configurado (`kubectl get hpa -n app`)
-- [ ] Consulta das informações do HPA (`kubectl describe hpa nginx -n app`)
+- [x] Deployment criado (`kubectl get deploy -n app`) — [`evidence/deployment-criado.png`](evidence/deployment-criado.png) (via k9s)
+- [x] Pods em execução antes do teste de carga (`kubectl get pods -n app`) — [`evidence/pods-antes-da-carga.png`](evidence/pods-antes-da-carga.png) (via k9s)
+- [x] HPA configurado (`kubectl get hpa -n app`) — [`evidence/hpa-configurado.png`](evidence/hpa-configurado.png) (via k9s)
+- [ ] Consulta das informações do HPA (`kubectl describe hpa nginx -n app`) — falta print com `describe` (mais detalhe que a tabela do k9s: eventos, condições)
 - [x] Execução do teste de carga (`k6 run loadtest/k6-hpa-test.js` — ver [`loadtest/k6-hpa-test.js`](../../loadtest/k6-hpa-test.js)) — coberto no vídeo
 - [x] Comportamento dos pods durante/após aumento de carga (`kubectl get pods -n app -w`) — coberto no vídeo
 - [x] Quantidade de réplicas após atuação do HPA (`kubectl get hpa -n app -w`) — coberto no vídeo
