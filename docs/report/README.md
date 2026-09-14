@@ -17,7 +17,7 @@
 > Prints a anexar no PDF final, um por item, com comando + resultado visível.
 > Vídeo de apoio (cobre execução do teste + comportamento dos pods + réplicas em tempo real): [`evidence/loadtest-run.mp4`](evidence/loadtest-run.mp4)
 
-- [ ] Cluster Kubernetes funcionando (`kubectl get nodes`)
+- [x] Cluster Kubernetes funcionando (`kubectl get nodes`) — [`evidence/cluster-funcionando.png`](evidence/cluster-funcionando.png) (via k9s)
 - [x] Deployment criado (`kubectl get deploy -n app`) — [`evidence/deployment-criado.png`](evidence/deployment-criado.png) (via k9s)
 - [x] Pods em execução antes do teste de carga (`kubectl get pods -n app`) — [`evidence/pods-antes-da-carga.png`](evidence/pods-antes-da-carga.png) (via k9s)
 - [x] HPA configurado (`kubectl get hpa -n app`) — [`evidence/hpa-configurado.png`](evidence/hpa-configurado.png) (via k9s)
