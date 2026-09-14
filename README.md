@@ -3,10 +3,6 @@
 </h1>
 
 <p align="center">
-  <img src="docs/cp3-icon.png" alt="CP3 HPA" width="120" />
-</p>
-
-<p align="center">
   <img src="https://skillicons.dev/icons?i=azure,terraform,kubernetes,git,github,bash" alt="Stacks" />
 </p>
 
