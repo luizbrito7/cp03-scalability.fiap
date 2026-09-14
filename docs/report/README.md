@@ -25,7 +25,7 @@
 - [x] Execução do teste de carga (`k6 run loadtest/k6-hpa-test.js` — ver [`loadtest/k6-hpa-test.js`](../../loadtest/k6-hpa-test.js)) — coberto no vídeo
 - [x] Comportamento dos pods durante/após aumento de carga (`kubectl get pods -n app -w`) — coberto no vídeo
 - [x] Quantidade de réplicas após atuação do HPA (`kubectl get hpa -n app -w`) — coberto no vídeo
-- [ ] Aplicação funcionando (`curl http://<EXTERNAL_IP>/` ou navegador)
+- [x] Aplicação funcionando (`curl http://<EXTERNAL_IP>/` ou navegador) — [`evidence/app-funcionando.png`](evidence/app-funcionando.png)
 
 Itens marcados `[x]` já têm evidência em vídeo; ainda assim, tirar 1-2 prints de frames chave (pico de réplicas, volta ao mínimo) pra facilitar leitura no PDF — vídeo sozinho não é aceito como "captura de tela".
 
