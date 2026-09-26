@@ -3,15 +3,12 @@
 </h1>
 
 <p align="center">
-  <img src="https://skillicons.dev/icons?i=azure,terraform,kubernetes,git,github,bash" alt="Stacks" />
+  <img src="docs/arch.gif" alt="Arquitetura: Terraform provisiona AKS na Azure, FluxCD sincroniza o nginx do GitHub e o HPA escala os pods sob carga do k6" />
 </p>
 
-```mermaid
-flowchart LR
-    TF[Terraform] -->|provisiona| AKS[AKS]
-    AKS -->|FluxCD sync| Nginx[nginx/openresty]
-    Nginx -->|k6 satura CPU via /load| HPA[HPA escala 2→10]
-```
+<p align="center">
+  <img src="https://skillicons.dev/icons?i=azure,terraform,kubernetes,git,github,bash" alt="Stacks" />
+</p>
 
 CP3: Horizontal Pod Autoscaler. AKS provisionado via Terraform, app nginx (imagem OpenResty: mesmo core nginx + módulo Lua) sincronizada via FluxCD (GitOps), HPA escalando por uso de CPU, validado com teste de carga (`k6`).
 
